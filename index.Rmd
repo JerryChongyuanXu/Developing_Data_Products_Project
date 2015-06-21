@@ -1,0 +1,54 @@
+---
+title       : Coursera Developing Data Products Project
+subtitle    : Calculate the Probability of Rare Disease
+author      : Jerry Chongyuan Xu
+job         : LY Enerlytics Big Data Director
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+url:
+  lib: ../../libraries
+  assets: ../../assets
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Introduction
+
+Generally, health examinations are widely used to judge whether a patient is attacked a disease. However, most tests are not 100 percent correct in fact. 
+
+If the test result of a disease is positive, especially those rare, dangerous diseases, how do you feel? Do you feel nervous?
+
+In fact, there is still possibility that you DON'T have such diseases even the test results are positive. So what is the probability that a person is truly attacked by the disease when his/her test result is positive? If the diagnose is 95 percent correctly, is the probability that he/she has the disease still 95 percent? 
+
+--- .class #id 
+
+## Example
+
+Example: The prevalence rate of a rare disease is 0.5%, its misdiagnosis rate is 5% (In other word, 5% of the sufferer has negative test result and 5% of the healthy people has positive test result). Now somebody has positive test result, what is the probability that he/she suffers the disease?
+
+--- .class #id
+
+## Solution
+
+We use Bayes Formula to solve this problem. Let $A$ denote the event that suffering the disease and $B$ denote positive results, what we want to calculate is $P(A|B)$. According to Bayes Rule, 
+$$P(A|B)=\frac{P(A)P(B|A)}{P(A)P(B|A)+P(A^c)|P(B|A^c)},$$
+where $P(A)=0.5%$, $P(B|A)=95%$, $P(B|A^c)=5%$. 
+```{r}
+x <- 0.5 / 100
+y <- 5 / 100
+(x * (1 - y)) / (x * (1 - y) + (1 - x) * y)
+```
+The result is 8.72%, much smaller than expected! 
+
+--- .class #id
+
+## Shiny Application
+
+Therefore, even a person who has a positive test result on a disease, he/she does not necessarily need to worry about it, since the probability that truly has the disease might be very small. 
+
+For this shiny application, the function is to calculate the truly sufferred probability for a person. Before using this application, one should provide the prevalence rate and the diagnose accuracy rate. 
+
+
+
